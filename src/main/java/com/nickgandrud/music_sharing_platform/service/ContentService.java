@@ -2,11 +2,8 @@ package com.nickgandrud.music_sharing_platform.service;
 
 import com.nickgandrud.music_sharing_platform.model.Content;
 import com.nickgandrud.music_sharing_platform.repository.ContentRepository;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -28,22 +25,28 @@ public class ContentService {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));
     }
 
-    public void create(@Valid @RequestBody Content content){
+    public void create(Content content){
         repository.save(content);
     }
 
-    public void update(@RequestBody Content content, @PathVariable Integer id){
+    public void update(Content content,Integer id){
         if(!repository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
         }
         repository.save(content);
     }
 
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(Integer id){
+        if (!repository.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Content not found"
+            );
+        }
         repository.deleteById(id);
     }
 
-    public List<Content> findByTitle(@PathVariable String keyword){
+    public List<Content> findByTitle(String keyword){
         return repository.findAllByTitleContains(keyword);
     }
 

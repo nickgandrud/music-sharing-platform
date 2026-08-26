@@ -1,7 +1,6 @@
 package com.nickgandrud.music_sharing_platform.controller;
 
 import com.nickgandrud.music_sharing_platform.model.Content;
-import com.nickgandrud.music_sharing_platform.repository.ContentRepository;
 import com.nickgandrud.music_sharing_platform.service.ContentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import java.util.List;
 public class ContentController {
 
     private final ContentService contentService;
-
 
     public ContentController(ContentService contentService) {this.contentService = contentService;}
 
@@ -39,7 +37,7 @@ public class ContentController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update (@RequestBody Content content, @PathVariable Integer id){
+    public void update(@RequestBody Content content, @PathVariable Integer id){
         contentService.update(content, id);
     }
 
