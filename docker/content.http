@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/content
 
 ### Get content by id
-GET http://localhost:8080/api/content/1
+GET http://localhost:8080/api/content/2
 
 ### Create new Content
 POST http://localhost:8080/api/content
@@ -18,11 +18,11 @@ Content-Type: application/json
 }
 
 ### Update existing content
-PUT http://localhost:8080/api/content/1
+PUT http://localhost:8080/api/content/3
 Content-Type: application/json
 
 {
-  "id": 1,
+  "id": 3,
   "title": "Going for Gold",
   "artist": "Little Annie",
   "type": "IDEA",
@@ -32,4 +32,4 @@ Content-Type: application/json
 }
 
 ### Delete existing content
-DELETE http://localhost:8080/api/content/1
+DELETE http://localhost:8080/api/content/2
