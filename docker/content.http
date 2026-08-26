@@ -1,0 +1,35 @@
+### Find all content
+GET http://localhost:8080/api/content
+
+### Get content by id
+GET http://localhost:8080/api/content/1
+
+### Create new Content
+POST http://localhost:8080/api/content
+Content-Type: application/json
+
+{
+  "title": "Going for Gold",
+  "artist": "Little Annie",
+  "type": "IDEA",
+  "contentType": "TRACK",
+  "dateCreated": "2015-06-01T00:00:00.000000",
+  "url": "https://www.youtube.com/watch?v=fmCQiosMvfY"
+}
+
+### Update existing content
+PUT http://localhost:8080/api/content/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Going for Gold",
+  "artist": "Little Annie",
+  "type": "IDEA",
+  "contentType": "TRACK",
+  "dateCreated": "2015-06-01T00:00:00.000000",
+  "url": "https://www.youtube.com/watch?v=fmCQiosMvfY"
+}
+
+### Delete existing content
+DELETE http://localhost:8080/api/content/1
