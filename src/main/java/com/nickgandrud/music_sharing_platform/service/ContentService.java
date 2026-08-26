@@ -28,22 +28,28 @@ public class ContentService {
         return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));
     }
 
-    public void create(@Valid @RequestBody Content content){
+    public void create(Content content){
         repository.save(content);
     }
 
-    public void update(@RequestBody Content content, @PathVariable Integer id){
+    public void update(Content content,Integer id){
         if(!repository.existsById(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
         }
         repository.save(content);
     }
 
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(Integer id){
+        if (!repository.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Content not found"
+            );
+        }
         repository.deleteById(id);
     }
 
-    public List<Content> findByTitle(@PathVariable String keyword){
+    public List<Content> findByTitle(String keyword){
         return repository.findAllByTitleContains(keyword);
     }
 
