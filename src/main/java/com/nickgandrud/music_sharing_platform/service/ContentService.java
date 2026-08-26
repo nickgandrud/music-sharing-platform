@@ -2,11 +2,8 @@ package com.nickgandrud.music_sharing_platform.service;
 
 import com.nickgandrud.music_sharing_platform.model.Content;
 import com.nickgandrud.music_sharing_platform.repository.ContentRepository;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
