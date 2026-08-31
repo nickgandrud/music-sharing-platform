@@ -1,5 +1,8 @@
 package com.nickgandrud.music_sharing_platform.controller;
 
+import com.nickgandrud.music_sharing_platform.dto.ContentResponse;
+import com.nickgandrud.music_sharing_platform.dto.CreateContentRequest;
+import com.nickgandrud.music_sharing_platform.dto.UpdateContentRequest;
 import com.nickgandrud.music_sharing_platform.model.Content;
 import com.nickgandrud.music_sharing_platform.service.ContentService;
 import jakarta.validation.Valid;
@@ -20,25 +23,25 @@ public class ContentController {
     public ContentController(ContentService contentService) {this.contentService = contentService;}
 
     @GetMapping("")
-    public List<Content> findAll(){
+    public List<ContentResponse> findAll(){
         return contentService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Content findById(@PathVariable Integer id){
+    public ContentResponse findById(@PathVariable Integer id){
         return contentService.findById(id);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@Valid @RequestBody Content content){
-        contentService.create(content);
+    public ContentResponse create(@Valid @RequestBody CreateContentRequest content){
+        return contentService.create(content);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@RequestBody Content content, @PathVariable Integer id){
-        contentService.update(content, id);
+    public ContentResponse update(@RequestBody UpdateContentRequest content, @PathVariable Integer id){
+       return contentService.update(content, id);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -48,7 +51,7 @@ public class ContentController {
     }
 
     @GetMapping("/filter/{keyword}")
-    public List<Content> findByTitle(@PathVariable String keyword){
+    public List<ContentResponse> findByTitle(@PathVariable String keyword){
         return contentService.findByTitle(keyword);
     }
 
