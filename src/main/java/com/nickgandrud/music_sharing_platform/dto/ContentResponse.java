@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 //Sends back this to the clients.
 public record ContentResponse(
         Integer id,
+        Integer userId,
         String title,
         String artist,
         Type contentType,

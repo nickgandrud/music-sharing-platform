@@ -12,10 +12,7 @@ public record CreateUserRequest(
         String username,
 
         @NotBlank(message = "Email is required")
-        String email,
-
-        @NotNull(message = "Date created is required")
-        LocalDateTime createdAt
+        String email
 ) {
 
 }
