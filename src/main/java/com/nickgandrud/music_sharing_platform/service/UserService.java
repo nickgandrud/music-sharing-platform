@@ -27,7 +27,7 @@ public class UserService {
     }
 
     public UserResponse findById(Integer id){
-        User user = findUserById(id);
+        User user = requireUserById(id);
         return toResponse(user);
     }
 
@@ -42,17 +42,6 @@ public class UserService {
         return toResponse(savedUser);
     }
 
-    //Helper method that checks if content exists by the supplied id in the database. Returns the user in the database if found
-    private User findUserById(Integer id){
-        return userRepository.findById(id)
-                .orElseThrow(() ->
-                        new ResponseStatusException(
-                                HttpStatus.NOT_FOUND,
-                                "User not found"
-                        )
-                );
-
-    }
     //Public Method to search the user
     public User requireUserById(Integer id) {
         return userRepository.findById(id)
@@ -64,7 +53,6 @@ public class UserService {
                 );
     }
 
-
     public UserResponse toResponse(User user){
         return new UserResponse(
                 user.id(),
@@ -73,6 +61,5 @@ public class UserService {
                 user.createdAt()
         );
     }
-
 
 }

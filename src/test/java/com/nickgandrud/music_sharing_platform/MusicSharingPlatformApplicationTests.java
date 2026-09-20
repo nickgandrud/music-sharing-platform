@@ -8,6 +8,7 @@ class MusicSharingPlatformApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

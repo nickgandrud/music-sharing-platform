@@ -38,27 +38,6 @@ public class ContentService {
 
     }
 
-    public ContentResponse create(CreateContentRequest request, Integer userId){
-        /*Creates a new Content object for the database. Id is kept null since postgres handles it. All other values are
-        filled in through the request object. */
-
-
-        Content content = new Content(
-                null,
-                userId,
-                request.title(),
-                request.artist(),
-                request.contentType(),
-                request.dateCreated(),
-                request.url()
-            );
-
-        //The content object is saved in the database and we save the content to the savedContent object.
-        Content savedContent =  contentRepository.save(content);
-        //Converts the database content into the ContentResponse format for the client.
-        return toResponse(savedContent);
-    }
-
     public ContentResponse createForUser(CreateContentRequest request, Integer userId){
         /*Creates a new Content object for the database. Id is kept null since postgres handles it. All other values are
         filled in through the request object. */
@@ -67,13 +46,14 @@ public class ContentService {
         User user = userService.requireUserById(userId);
         Content content = new Content(
                 null,
-                userId,
+                user.id(),
                 request.title(),
                 request.artist(),
                 request.contentType(),
                 request.dateCreated(),
                 request.url()
         );
+
 
         //The content object is saved in the database and we save the content to the savedContent object.
         Content savedContent =  contentRepository.save(content);
