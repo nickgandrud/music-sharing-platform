@@ -34,13 +34,13 @@ public class ContentController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public ContentResponse create(@Valid @RequestBody CreateContentRequest content){
-        return contentService.create(content);
+    public ContentResponse create(@Valid @RequestBody CreateContentRequest content, Integer userId){
+        return contentService.createForUser(content,userId);
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+
     @PutMapping("/{id}")
-    public ContentResponse update(@RequestBody UpdateContentRequest content, @PathVariable Integer id){
+    public ContentResponse update( @Valid @RequestBody UpdateContentRequest content, @PathVariable Integer id){
        return contentService.update(content, id);
     }
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public record Content(
         @Id
         Integer id,
+        Integer userId,
         String title,
         String artist,
         Type contentType,

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,7 +27,7 @@ public class UserService {
     }
 
     public UserResponse findById(Integer id){
-        User user = findUserById(id);
+        User user = requireUserById(id);
         return toResponse(user);
     }
 
@@ -35,22 +36,21 @@ public class UserService {
                 null,
                 createUserRequest.username(),
                 createUserRequest.email(),
-                createUserRequest.createdAt()
+                LocalDateTime.now()
         );
-        userRepository.save(user);
-        return toResponse(user);
+        User savedUser = userRepository.save(user);
+        return toResponse(savedUser);
     }
 
-    //Helper method that checks if content exists by the supplied id in the database. Returns the user in the database if found
-    private User findUserById(Integer id){
+    //Public Method to search the user
+    public User requireUserById(Integer id) {
         return userRepository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(
                                 HttpStatus.NOT_FOUND,
-                                "Content not found"
+                                "User not found"
                         )
                 );
-
     }
 
     public UserResponse toResponse(User user){
@@ -61,6 +61,5 @@ public class UserService {
                 user.createdAt()
         );
     }
-
 
 }
